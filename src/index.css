@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'opensans';
+    src: url('./assets/opensans.ttf');
+}
+@font-face {
+    font-family: 'nunito';
+    src: url('./assets/nunito.ttf');
+}
+@font-face {
+    font-family: 'space';
+    src: url('./assets/space.ttf');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
