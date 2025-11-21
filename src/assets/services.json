@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Cloud Computing",
+    "desc": "Scalable and secure cloud infrastructures designed to support your business growth. We help you migrate, manage, and optimize cloud environments."
+  },
+  {
+    "id": 2,
+    "title": "IT Consultancy",
+    "desc": "Expert guidance to help you make smarter technology decisions. We align your IT systems with your long-term business vision."
+  },
+  {
+    "id": 3,
+    "title": "Software Development",
+    "desc": "End-to-end custom software tailored to your business goals. We build intuitive, efficient, and scalable applications that evolve with your needs"
+  },
+  {
+    "id": 4,
+    "title": "UI/UX Design",
+    "desc": "User-focused designs that enhance engagement and elevate digital experiences. We ensure your product is visually appealing, intuitive, and conversion-driven."
+  },
+  {
+    "id": 5,
+    "title": "Cloud Hosting",
+    "desc": "Hosting solutions with high performance and 99.9% uptime. Built to keep your applications fast, secure, and accessible."
+  },
+  {
+    "id": 6,
+    "title": "Enterprise Application",
+    "desc": "Expert guidance to help you make smarter technology decisions. We align your IT systems with your long-term business vision."
+  }
+]

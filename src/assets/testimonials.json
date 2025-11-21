@@ -1,0 +1,34 @@
+[
+    {
+
+        "id": 1,
+        "name": "Daniel Adams",
+        "desc": "Our new platform is faster, cleaner, and easier for our customers to use. Working with your team made everything smooth from start to finish.",
+        "title": "“You made the process effortless”",
+        "image": "./src/assets/daniel.png"
+    },
+    {
+
+        "id": 2,
+        "name": "Mary Samuel",
+        "desc": "The solution delivered exceeded our expectations. Performance improved, and our workflow is now far more efficient.",
+        "title": "“Exactly what our business needed.”",
+        "image": "./src/assets/mary.png"
+    },
+    {
+
+        "id": 3,
+        "name": "Daniel Adams",
+        "desc": "Our new platform is faster, cleaner, and easier for our customers to use. Working with your team made everything smooth from start to finish.",
+        "title": "“You made the process effortless”",
+        "image": "./src/assets/daniel.png"
+    },
+    {
+
+        "id": 4,
+        "name": "Mary Samuel",
+        "desc": "The solution delivered exceeded our expectations. Performance improved, and our workflow is now far more efficient.",
+        "title": "“Exactly what our business needed.”",
+        "image": "./src/assets/mary.png"
+    }
+]
