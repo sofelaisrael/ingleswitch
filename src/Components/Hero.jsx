@@ -8,7 +8,7 @@ const Hero = () => {
 
       
       <div className="w-full flex flex-col gap-3 justify-between items-center text-center text-white relative overflow-hidden">
-        <div className="wave absolute top-10 left-0 overflow-hidden h-[200px] w-full">
+        <div className="wave absolute top-10 left-0 overflow-hidden h-[200px] w-full max-md:hidden">
           <img src={grid} alt="" />
         </div>
         <div className="build rounded-full bg-linear-to-r from-[#001E2B4d] to-[#9999994d] text-[13px] max-md:text-[10px] py-1 px-10 max-md:px-5 font-semibold">
@@ -57,3 +57,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
