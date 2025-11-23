@@ -3,8 +3,6 @@ import Hero from "../Components/Hero";
 import ServiceSection from "../Components/ServiceSection";
 import AboutSection from "../Components/AboutSection";
 import { motion, useInView } from "framer-motion";
-import arrow from "../assets/arrow.png";
-import shape from "../assets/shape.svg";
 import star from "../assets/star.svg";
 
 function useCountUp(end, duration = 2000) {
@@ -79,3 +77,4 @@ const Home = () => {
 };
 
 export default Home;
+
