@@ -1,34 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import right from "../assets/right.svg";
-import left from "../assets/left.svg";
-import star from "../assets/star.svg";
 import { RxCaretRight } from "react-icons/rx";
 import testimonials from "../assets/testimonials";
 import { motion, useInView } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import cursor from "../assets/cursor.png";
-
-function useCountUp(end, duration = 2000) {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    let start = 0;
-    const increment = end / (duration / 16);
-
-    const counter = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        start = end;
-        clearInterval(counter);
-      }
-      setValue(Math.floor(start));
-    }, 16);
-
-    return () => clearInterval(counter);
-  }, [end, duration]);
-
-  return value;
-}
 
 const AboutSection = () => {
   const itemsPerPage = 2;
@@ -37,7 +13,6 @@ const AboutSection = () => {
   const [page, setPage] = useState(0);
   const direction = 1;
 
-  // AUTO-SCROLL (With pause on hover)
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
@@ -50,15 +25,6 @@ const AboutSection = () => {
     return () => clearInterval(interval);
   }, [isPaused, totalPages]);
 
-  // stats animation
-  const statsRef = useRef(null);
-  const statsInView = useInView(statsRef, { once: true, amount: 1 });
-
-  const clients = useCountUp(statsInView ? 15 : 0);
-  const retention = useCountUp(statsInView ? 95 : 0);
-  const experience = useCountUp(statsInView ? 5 : 0);
-
-  // item animation variants
   const itemVariants = {
     hidden: { opacity: 0.2, y: 20 },
     show: (delay) => ({
@@ -68,7 +34,6 @@ const AboutSection = () => {
     }),
   };
 
-  // separate refs for each
   const r1 = useRef(null);
   const r2 = useRef(null);
   const r3 = useRef(null);
@@ -101,14 +66,12 @@ const AboutSection = () => {
 
   return (
     <>
-      <section className="bg-[#020B0C] text-white flex flex-col items-center p-10 relative font-[space] max-md:p-5">
-
+      <section className="bg-[#020B0C] text-white flex flex-col items-center p-10 mt-10 relative font-[space] max-md:p-5">
         <div className="build rounded-full bg-linear-to-r from-[#001E2B4d] to-[#9999994d] text-[13px] max-md:text-[10px] py-1 px-10 max-md:px-5 font-semibold">
           Building Affordable Solutions Around You
         </div>
 
         <div className="about py-10 w-1/2 max-md:w-full flex flex-col gap-10">
-
           {/* --- ITEM 1 --- */}
           <motion.div
             ref={r1}
@@ -168,46 +131,18 @@ const AboutSection = () => {
               </div>
             </div>
           </motion.div>
-
         </div>
 
-        <img src={right} alt="" className="absolute right-0 top-0 max-md:w-[50px]" />
-        <img src={left} alt="" className="absolute left-0 top-40 max-md:w-[50px]" />
+        <img
+          src={right}
+          alt=""
+          className="absolute right-0 top-0 max-md:w-[50px]"
+        />
       </section>
 
-      {/* ===== STATS SECTION WITH COUNT UP ===== */}
-      <div
-        ref={statsRef}
-        className="stats md:bg-linear-to-r from-[#000000] to-[#09222C] max-md:bg-[#020B0C]  flex items-center justify-center max-md:flex-col gap-16 max-lg:gap-5 text-white font-[space] py-5 -lg:gap-10"
-      >
-        <div className="flex flex-col items-center">
-          <div className="key text-[12px] text-[#ffffff7e]">Completed Projects</div>
-          <div className="value text-[24px]">{clients}+ Clients</div>
-        </div>
-        <img src={star} className="max-md:hidden" alt="" />
-
-        <div className="flex flex-col items-center">
-          <div className="key text-[12px] text-[#ffffff7e]">Client Retention Rate</div>
-          <div className="value text-[24px]">{retention}%</div>
-        </div>
-        <img src={star} className="max-md:hidden" alt="" />
-
-        <div className="flex flex-col items-center">
-          <div className="key text-[12px] text-[#ffffff7e]">Years of Experience</div>
-          <div className="value text-[24px]">{experience}+</div>
-        </div>
-        <img src={star} className="max-md:hidden" alt="" />
-
-        <div className="flex flex-col items-center">
-          <div className="key text-[12px] text-[#ffffff7e]">Dedicated Support</div>
-          <div className="value text-[24px]">24/7</div>
-        </div>
-      </div>
-
-      {/* ===== TESTIMONIALS SECTION WITH AUTO-SCROLL + PAUSE ON HOVER ===== */}
-      <section className="testimonials p-10 max-md:p-5">
+      <section className="testimonials px-10 max-md:p-5">
         <div
-          className="testimonials p-10 max-md:p-5 bg-linear-to-b from-[#020B0C] to-[#053246] relative"
+          className="testimonials p-10 max-md:p-5 bg-linear-to-b from-[#020B0C] to-[#0F1214] relative"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -235,11 +170,15 @@ const AboutSection = () => {
                       <img src={item.image} alt="" />
                     </div>
 
-                    <h3 className="text-xl max-md:text-[16px] font-semibold mb-3 max-md:mb-0">{item.title}</h3>
+                    <h3 className="text-xl max-md:text-[16px] font-semibold mb-3 max-md:mb-0">
+                      {item.title}
+                    </h3>
                     <p className="text-gray-300 leading-relaxed mb-5 max-md:mb-2 max-md:text-[12px]">
                       {item.desc}
                     </p>
-                    <p className="font-semibold max-md:text-[14px]">{item.name}</p>
+                    <p className="font-semibold max-md:text-[14px]">
+                      {item.name}
+                    </p>
                   </div>
                 ))}
               </motion.div>
@@ -263,7 +202,6 @@ const AboutSection = () => {
         </div>
       </section>
 
-      {/* ===== START SECTION ===== */}
       <section className="start grid grid-cols-6 gap-10 text-white font-[space] px-10 w-2/3 max-lg:w-4/5 mx-auto py-20 max-md:px-5 max-md:w-full max-md:text-[10px]">
         <div className="col-span-4 max-md:col-span-full">
           <div className="head text-[24px] max-md:text-[16px] flex items-center gap-3">
@@ -279,7 +217,8 @@ const AboutSection = () => {
 
         <div className="col-span-2 max-md:col-span-full">
           <div className="contact max-lg:text-[12px] w-fit border px-10 max-lg:px-3 rounded-full border-gray-500 py-1 flex items-center gap-1 cursor-pointer">
-            Contact Us <RxCaretRight className="text-[24px] max-md:text-[16px]" />
+            Contact Us{" "}
+            <RxCaretRight className="text-[24px] max-md:text-[16px]" />
           </div>
         </div>
       </section>
