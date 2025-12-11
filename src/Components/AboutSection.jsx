@@ -38,9 +38,47 @@ const AboutSection = () => {
   const r2 = useRef(null);
   const r3 = useRef(null);
 
-  const v1 = useInView(r1, { once: true, amount: 1 });
-  const v2 = useInView(r2, { once: true, amount: 1 });
-  const v3 = useInView(r3, { once: true, amount: 1 });
+  // useInView: trigger when the item is nearly centered in the viewport
+  // rootMargin shrinks the intersection area so the element must come close to the middle.
+  const observerOptions = { once: false, rootMargin: "0% 0px -300px 0px" };
+  const v1 = useInView(r1, observerOptions);
+  const v2 = useInView(r2, observerOptions);
+  const v3 = useInView(r3, observerOptions);
+
+  // Moving side line: single indicator that animates to the currently visible item
+  const aboutRef = useRef(null);
+  const [activeIdx, setActiveIdx] = useState(null);
+  const [linePos, setLinePos] = useState({ top: 0, height: 0 });
+
+  // choose active based on which item(s) are in view.
+  // If multiple are visible, pick the one with the highest index (closest to bottom).
+  useEffect(() => {
+    const vis = [v1, v2, v3];
+    const lastVisible = vis
+      .map((v, i) => (v ? i : -1))
+      .filter((i) => i !== -1)
+      .pop();
+    setActiveIdx(lastVisible ?? null);
+  }, [v1, v2, v3]);
+
+  // compute target top/height inside the about container
+  useEffect(() => {
+    const refs = [r1, r2, r3];
+    function update() {
+      if (activeIdx == null) return;
+      const aboutEl = aboutRef.current;
+      const itemEl = refs[activeIdx].current;
+      if (!aboutEl || !itemEl) return;
+      const aRect = aboutEl.getBoundingClientRect();
+      const iRect = itemEl.getBoundingClientRect();
+      // top relative to about container
+      const top = iRect.top - aRect.top + aboutEl.scrollTop;
+      setLinePos({ top, height: iRect.height });
+    }
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [activeIdx]);
 
   const variants = {
     enter: (direction) => ({
@@ -71,7 +109,18 @@ const AboutSection = () => {
           Building Affordable Solutions Around You
         </div>
 
-        <div className="about py-10 w-1/2 max-md:w-full flex flex-col gap-10">
+        <div
+          ref={aboutRef}
+          className="about relative py-10 w-1/2 max-md:w-full flex flex-col gap-10"
+        >
+          {/* moving indicator */}
+          <motion.div
+            className="absolute w-1 bg-linear-to-t from-[#737373] to-[#001E2B] -left-10 rounded-sm"
+            animate={{ top: linePos.top, height: linePos.height }}
+            transition={{ type: "spring", stiffness: 160, damping: 22 }}
+            style={{ willChange: "top, height" }}
+          />
+
           {/* --- ITEM 1 --- */}
           <motion.div
             ref={r1}
@@ -81,7 +130,6 @@ const AboutSection = () => {
             animate={v1 ? "show" : "hidden"}
           >
             <div className="first space-y-2 relative">
-              <div className="absolute w-1 h-full bg-linear-to-t from-[#737373] to-[#001E2B] -left-10"></div>
               <div className="title text-[18px]">DISCOVERY & STRATEGY</div>
               <div className="desc text-[14px] text-[#ffffffAC]">
                 We analyze your goals, identify opportunities, and craft a clear
@@ -202,7 +250,7 @@ const AboutSection = () => {
         </div>
       </section>
 
-      <section className="start grid grid-cols-6 gap-10 text-white font-[space] px-10 w-2/3 max-lg:w-4/5 mx-auto py-20 max-md:px-5 max-md:w-full max-md:text-[10px]">
+      <section className="start grid grid-cols-6 gap-10 max-md:gap-3 text-white font-[space] px-10 w-2/3 max-lg:w-4/5 mx-auto py-20 max-md:px-5 max-md:w-full max-md:text-[10px]">
         <div className="col-span-4 max-md:col-span-full">
           <div className="head text-[24px] max-md:text-[16px] flex items-center gap-3">
             <span>Ready to Elevate your Business?</span>

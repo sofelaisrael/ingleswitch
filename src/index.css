@@ -19,3 +19,13 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+
+
+.mask-reveal {
+    mask-image: linear-gradient(to right, transparent 0%, black 0%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 0%);
+}
+.mask-hidden {
+    mask-image: linear-gradient(to right, transparent 0%, black 1000%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 1000%);
+}

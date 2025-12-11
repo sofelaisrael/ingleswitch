@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="mx-auto flex items-center justify-between px-20 py-5 max-md:px-10 max-sm:px-5">
         <img src={logo} className="w-20 cursor-pointer" />
 
-        <div className="flex justify-center items-center gap-5 text-[14px] max-md:text-[10px] max-md:gap-3">
+        <div className="flex justify-center items-center gap-5 text-[14px] max-md:gap-3">
           <Link to="/" className="home">
             Home
           </Link>

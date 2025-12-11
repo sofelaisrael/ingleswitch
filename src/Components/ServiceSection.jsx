@@ -7,7 +7,6 @@ import arrow from "../assets/arrow.png";
 import shape from "../assets/shape.svg";
 import star from "../assets/star.svg";
 
-
 function useCountUp(end, duration = 2000) {
   const [value, setValue] = useState(0);
 
@@ -30,10 +29,9 @@ function useCountUp(end, duration = 2000) {
   return value;
 }
 const ServiceSection = () => {
-  
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true, amount: 1 });
-    const clients = useCountUp(statsInView ? 15 : 0);
+  const clients = useCountUp(statsInView ? 15 : 0);
   const retention = useCountUp(statsInView ? 95 : 0);
   const experience = useCountUp(statsInView ? 5 : 0);
   return (
@@ -50,7 +48,7 @@ const ServiceSection = () => {
         </div>
       </div>
 
-      <div className="content py-6 max-md:text-[12px] text-[#FFFFFFCC]">
+      <div className="content py-6text-[#FFFFFFCC]">
         At IngleSwitch we are experts in delivering Technology Solutions. Our
         solutions are cost effective, easy to use and adaptive for next level
         growth. These solutions provide the platform for an agile ICT
@@ -58,31 +56,41 @@ const ServiceSection = () => {
         instantly transform any organization and deliver visible return on
         Investment.
       </div>
-      <div className="end flex justify-end gap- max-lg:w-2/3 max-md:w-full max-lg:ml-auto w-fit mt-5">
-          <div className="arrow -translate-y-[30px]">
-            <img src={arrow} className="rotate-190" alt="" />
-          </div>
-          <div className="text-[17px] max-md:text-[12px] inline-flex items-center justify-center px-2 py-6 rounded-lg gap-5 max-md:gap-2">
-            <span>Innovate.</span>
-            <span className="bg-linear-to-r from-[#CEE902] to-[#830201] h-1 w-8 max-md:w-4 rounded-full"></span>
-            <span>Accelerate.</span>
-            <span className="bg-linear-to-r from-[#CEE902] to-[#830201] h-1 w-8 max-md:w-4 rounded-full"></span>
-            <span>Thrive.</span>
-          </div>
+       
+      <div className="end flex justify-end gap- max-lg:w-2/3 max-md:justify-center max-lg:mx-auto max-lg:ml-auto w-fit mt-10">
+        <div className="arrow -translate-y-[30px] max-md:hidden">
+          <img src={arrow} className="rotate-190" alt="" />
         </div>
+        <div className="text-[17px] max-md:text-[17px] inline-flex items-center justify-center px-2 py-6 rounded-lg gap-5 max-md:gap-2 max-md:py-2">
+          <span>Innovate.</span>
+          <span className="bg-linear-to-r from-[#CEE902] to-[#830201] h-1 w-8 max-md:w-4 rounded-full"></span>
+          <span>Accelerate.</span>
+          <span className="bg-linear-to-r from-[#CEE902] to-[#830201] h-1 w-8 max-md:w-4 rounded-full"></span>
+          <span>Thrive.</span>
+        </div>
+      </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 pt-10 gap-5">
-        {services.map((services) => (
-          <div className="bg-linear-to-t from-[#060f1667] to-[#16171757] flex flex-col gap-1 border-t-2 border-[#FFFFFF1A] rounded-lg p-5">
-            <div className="items text-[20px]">{services.title}</div>
-            <div className="cont text-[12px] text-white/50">{services.desc}</div>
-          </div>
+         {services.map((service, idx) => (
+          <motion.div
+           key={service.id ?? idx}
+           initial={{ opacity: 0, y: 24 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true, amount: 0.2 }}
+           transition={{ duration: 0.6, ease: "easeOut", delay: idx * 0.1 }}
+           className="bg-linear-to-t from-[#060f1667] to-[#16171757] flex flex-col gap-1 border-t-2 border-[#FFFFFF1A] rounded-lg p-5"
+         >
+           <div className="items text-[20px]">{service.title}</div>
+           <div className="cont text-[20px] text-white/50">{service.desc}</div>
+         </motion.div>
         ))}
       </div>
 
-      
-      
-        <img src={shape} alt="" className="absolute right-0 top-0 max-md:w-[50px]" />
+      <img
+        src={shape}
+        alt=""
+        className="absolute right-0 top-0 max-md:w-[50px]"
+      />
     </section>
   );
 };

@@ -26,12 +26,15 @@ function useCountUp(end, duration = 2000) {
 
   return value;
 }
+
 const Home = () => {
+
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true, amount: 1 });
   const clients = useCountUp(statsInView ? 15 : 0);
   const retention = useCountUp(statsInView ? 95 : 0);
   const experience = useCountUp(statsInView ? 5 : 0);
+
   return (
     <div className="bg-[#020B0C]">
       <Hero />
@@ -77,4 +80,3 @@ const Home = () => {
 };
 
 export default Home;
-
